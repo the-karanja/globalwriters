@@ -14,7 +14,7 @@
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-scholar.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
@@ -169,10 +169,7 @@ https://templatemo.com/tm-586-scholar
                     <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
                   </fieldset>
                 </div>
-                <fieldset>
-                 <input id="file" type="file">
-                  <!-- <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required> -->
-                </fieldset>
+             
                 <div class="col-lg-12">
                   <fieldset>
                     <textarea name="message" id="message" placeholder="Your Message"></textarea>
@@ -180,7 +177,7 @@ https://templatemo.com/tm-586-scholar
                 </div>
                 <div class="col-lg-12">
                   <fieldset>
-                    <a  href="mailto:bcaranja@gmail.com" type="submit" id="form-submit" >Place Order Now</a>
+                    <button type="button  " id="form-submit" onclick="send()" class="orange-button">Place Order Now</button>
                   </fieldset>
                 </div>
               </div>
@@ -729,6 +726,36 @@ https://templatemo.com/tm-586-scholar
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
-
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+  <script type="text/javascript">
+    (function(){
+       emailjs.init("JRzUpr0GFESZNMijO");
+    })();
+    function send () {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      const subject = `Message from ${name}`;
+       const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage:%0D%0A${message}`;
+       const mailtoLink = `mailto:bcaranja@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+       window.location.href = mailtoLink;
+      
+    }
+    function sends () {
+      var templateParams = {
+        name: 'James',
+        notes: 'Check this out!'
+    };
+     
+    emailjs.send('service_i8bdyp5', 'service_i8bdyp5', templateParams)
+        .then(function(response) {
+           console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+           console.log('FAILED...', error);
+        });
+    }
+  </script>
   </body>
 </html>
